@@ -1,33 +1,9 @@
 .container {
   display: grid;
-  grid-template-columns: 0.5fr repeat(4, 1fr);
+  grid-template-columns: 1fr repeat(4, 1fr);
   grid-template-rows: 0.5fr repeat(3, 1fr) 0.5fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 100vh; /* Tuỳ chọn */
-}
-
-.header {
-  grid-area: 1 / 2 / 2 / 6;
-  border-bottom: 1px solid #ccc;
-
-
-}
-
-.overview {
-  grid-area: 2 / 2 / 3 / 6;
-}
-
-.datable {
-  grid-area: 3 / 2 / 5 / 6;
-}
-
-.sidebar {
-  grid-area: 1 / 1 / 5 / 2;
-  border-right: 1px solid #ccc;
-}
-
-.footer {
-  grid-area: 5 / 1 / 6 / 6;
-  border-top: 1px solid #ccc;
+  height: 100vh;
+  /* Tuỳ chọn */
 }

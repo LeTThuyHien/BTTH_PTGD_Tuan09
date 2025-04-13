@@ -1,15 +1,22 @@
 
 import './App.css'
+import Header from './components/Header/Header'
+import Overview from './components/Overview/Overview'
+import Datatable from './components/Datatable/Datatable'
+import Sidebar from './components/Sidebar/Sidebar'
+import Footer from './components/Footer/Footer'
+
 
 function App() {
 
   return (
     <div className='container'>
-      <header className='header'>Header</header>
-      <div className="overview">Overview</div>
-      <div className="datable">DashBoard</div>
-      <aside className='sidebar'>Menu</aside>
-      <footer className='footer'>Footer</footer>
+      <Header/>
+      <Overview/>
+      <Datatable/>
+      <Sidebar/>
+      <Footer/>
+   
     </div>
 
   )

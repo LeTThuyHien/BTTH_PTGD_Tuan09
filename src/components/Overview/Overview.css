@@ -1,0 +1,101 @@
+/* Overview.css */
+
+.overview {
+    grid-area: 2 / 2 / 3 / 6;
+    /* Adjust grid area as needed */
+
+    padding: 15px 20px;
+}
+
+.list-item {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding-top: 15px;
+}
+
+
+
+.item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    width: calc(33.33% - 13.33px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.5;
+}
+
+.overview-header {
+    display: flex;
+    justify-content: space-between;
+    /* Space out title and icon */
+    align-items: center;
+    /* Vertically align title and icon */
+    width: 100%;
+    /* Make header take full width of the item */
+
+}
+
+
+
+.icon {
+    padding: 8px;
+    /* Add padding around the icon */
+    border-radius: 8px;
+    /* Make it circular */
+    border: 1px solid #ccc;
+    /* Add a light gray border */
+    display: flex;
+    /* Center the icon inside the bordered circle */
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    /* Icon size */
+}
+
+/* Specific icon colors */
+.item:nth-child(1) .icon {
+    color: #e91e63;
+    /* Pink */
+    border-color: #e91e63;
+    /* Pink border */
+    background-color: rgba(233, 30, 99, 0.1);
+    /* Light pink background */
+}
+
+.item:nth-child(2) .icon {
+    color: #1576c5;
+    /* Blue */
+    border-color: #196fb6;
+    /* Green border */
+    background-color: rgba(76, 175, 80, 0.1);
+    /* Light green background */
+}
+
+.item:nth-child(3) .icon {
+    color: #2196f3;
+    /* Blue */
+    border-color: #2196f3;
+    /* Blue border */
+    background-color: rgba(33, 150, 243, 0.1);
+    /* Light blue background */
+}
+
+.overview-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.overview-note {
+    font-size: 12px;
+    color: #777;
+    padding-top: 10px;
+}
+
+.overview-note span {
+    font-weight: normal;
+}
