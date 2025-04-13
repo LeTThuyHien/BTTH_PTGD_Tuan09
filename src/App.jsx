@@ -1,25 +1,20 @@
 
-import './App.css'
-import Header from './components/Header/Header'
-import Overview from './components/Overview/Overview'
-import Datatable from './components/Datatable/Datatable'
-import Sidebar from './components/Sidebar/Sidebar'
-import Footer from './components/Footer/Footer'
-
-
-function App() {
-
+import Header from './Components/Header/Header'
+import Footer from './Components/Footer/Footer'
+import Overview from './Components/Overview/Overview'
+import Sidebar from './Components/Sidebar/Sidebar'
+import Content from './components/Content/Content'
+import "./App.css"
+function RouterSetup() {
   return (
-    <div className='container'>
-      <Header/>
-      <Overview/>
-      <Datatable/>
-      <Sidebar/>
-      <Footer/>
-   
+    <div className='app'>
+      <Header />
+      <Overview />
+      <Content />
+      <Sidebar />
+      <Footer />
     </div>
-
-  )
+  );
 }
 
-export default App
+export default RouterSetup;
