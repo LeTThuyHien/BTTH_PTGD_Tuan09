@@ -1,46 +1,27 @@
 import React, { useState } from "react";
-import "./AddUserModal.css"; // CSS bạn có thể dùng chung với EditForm nếu muốn
+import CloudinaryUpload from "../CloudinaryUpload/CloudinaryUpload";
 
-const AddUserModal = ({ onClose, onUserAdded }) => {
+const AddUserModal = ({ onSave, onCancel }) => {
     const [formData, setFormData] = useState({
         name: "",
         company: "",
         value: "",
         date: "",
         status: "In-progress",
-        img: null,
+        img: "",
     });
 
     const handleChange = (e) => {
-        const { name, value, type, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: type === "file" ? files[0] : value,
-        }));
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        const payload = new FormData();
-        Object.entries(formData).forEach(([key, value]) => {
-            payload.append(key, value);
-        });
-
-        try {
-            const res = await fetch("/api/users", {
-                method: "POST",
-                body: payload,
-            });
-
-            if (!res.ok) throw new Error("Failed to add user");
-
-            const result = await res.json();
-            onUserAdded(result); // thông báo ra ngoài để cập nhật lại bảng
-            onClose(); // đóng modal
-        } catch (error) {
-            alert("Error adding user: " + error.message);
-        }
+        // Gọi onSave với dữ liệu đầy đủ
+        onSave(formData);
+        onCancel();
     };
 
     return (
@@ -50,7 +31,10 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Avatar</label>
-                        <input type="file" name="img" onChange={handleChange} accept="image/*" />
+                        {/* Gọi CloudinaryUpload component */}
+                        <CloudinaryUpload
+                            onUpload={(url) => setFormData((prev) => ({ ...prev, img: url }))}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Customer Name</label>
@@ -111,7 +95,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
                     </div>
                     <div className="form-actions">
                         <button type="submit" className="save-btn">Add User</button>
-                        <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
+                        <button type="button" className="cancel-btn" onClick={onCancel}>Cancel</button>
                     </div>
                 </form>
             </div>
