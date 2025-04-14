@@ -1,19 +1,37 @@
-import { memo} from "react";
+import React, { memo, useEffect, useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
-import "datatables.net-select-dt"
-
+import "datatables.net-select-dt";
+import EditForm from "../../../components/EditForm/EditForm"; // Đảm bảo đường dẫn này đúng
 import "./Table.css";
-
 
 DataTable.use(DT);
 
-function Table({ data}) {
+function Table({ data }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingId, setEditingId] = useState(null);
 
+    const handleClickEdit = (id) => {
+        setEditingId(id);
+        setIsEditing(true);
+    };
+
+    const handleSave = (editedData) => {
+        console.log("Dữ liệu đã chỉnh sửa:", editedData);
+        setIsEditing(false);
+        setEditingId(null);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        setEditingId(null);
+    };
+
+    const recordToEdit = data.find((item) => item.id === editingId);
 
     const columns = [
         {
-            title: `<div style="text-align: center; border: none;">
+            title: `<div style="text-align: center;">
                         <input type="checkbox" />
                     </div>`,
             data: null,
@@ -23,7 +41,7 @@ function Table({ data}) {
                 </div>`,
         },
         {
-            title: 'CUSTOMER NAME',
+            title: "CUSTOMER NAME",
             data: null,
             render: (data, type, row) =>
                 `<div style="display: flex; align-items: center; padding-left: 30px">
@@ -35,52 +53,80 @@ function Table({ data}) {
                     <span>${row.name}</span>
                 </div>`,
         },
-        { title: 'COMPANY', data: 'company' },
+        { title: "COMPANY", data: "company" },
         {
-            title: 'ORDER VALUE',
-            data: 'value',
+            title: "ORDER VALUE",
+            data: "value",
             render: (data) => `${data.toString()}`,
         },
         {
-            title: 'ORDER DATE',
-            data: 'date',
+            title: "ORDER DATE",
+            data: "date",
             render: (data) => {
                 const date = new Date(data);
                 const formattedDate = date
-                    .toLocaleDateString('en-GB')
-                    .replace(/\//g, '/');
+                    .toLocaleDateString("en-GB")
+                    .replace(/\//g, "/");
                 return `<span style="color: #a8a6a6;">${formattedDate}</span>`;
             },
         },
         {
-            title: 'STATUS',
-            data: 'status',
+            title: "STATUS",
+            data: "status",
             render: (data) => {
-                let statusClass = '';
-                if (data === 'New') statusClass = 'status-new';
-                else if (data === 'In-progress')
-                    statusClass = 'status-in-progress';
-                else if (data === 'Complete') statusClass = 'status-completed';
+                let statusClass = "";
+                if (data === "New") statusClass = "status-new";
+                else if (data === "In-progress") statusClass = "status-in-progress";
+                else if (data === "Complete") statusClass = "status-completed";
 
                 return `<span class="${statusClass}">${data}</span>`;
             },
         },
         {
-            title: '',
+            title: "",
             data: null,
             render: (data, type, row) => {
-                return `<div class="box-check" style="cursor: pointer; transition: transform 0.2s;" 
-                onClick="handleClickEdit(${row.id})">
-                           <svg  fill="#a8a6a6" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 306.637 306.637" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"></path> <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
-                        </div>`;
+                return `
+                    <div class="box-check" data-id="${row.id}" style="cursor: pointer; display: flex; justify-content: center;">
+                        <svg fill="#a8a6a6" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306.637 306.637">
+                            <g> 
+                                <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"></path> 
+                                <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z"></path> 
+                            </g>
+                        </svg>
+                    </div>
+                `;
             },
         },
     ];
 
+    useEffect(() => {
+        const table = document.querySelector("table");
 
+        const handleEditClick = (e) => {
+            const target = e.target.closest(".box-check");
+            if (target) {
+                const id = target.getAttribute("data-id");
+                if (id) handleClickEdit(id);
+            }
+        };
+
+        table?.addEventListener("click", handleEditClick);
+        return () => {
+            table?.removeEventListener("click", handleEditClick);
+        };
+    }, [data]);
 
     return (
         <>
+            {isEditing && (
+                <EditForm
+                    record={recordToEdit}
+                    onSave={handleSave}
+                    onCancel={handleCancelEdit}
+                />
+            )}
+
             <DataTable
                 data={data}
                 columns={columns}
@@ -92,15 +138,11 @@ function Table({ data}) {
                     info: true,
                     pageLength: 6,
                     language: {
-                        info: '_TOTAL_ results',
+                        info: "_TOTAL_ results",
                     },
                 }}
             />
-
-
-
         </>
-
     );
 }
 
