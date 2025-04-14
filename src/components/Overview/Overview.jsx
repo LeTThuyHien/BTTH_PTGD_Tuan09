@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Overview.css";
 import { FaCaretUp, FaCartPlus, FaDollarSign, FaUser } from "react-icons/fa";
+import { FaLayerGroup } from "react-icons/fa6";
 function Overview() {
     const [overviewData, setOverviewData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,7 +28,8 @@ function Overview() {
     return (
         <div className="overview">
             <div className="title">
-                <h2>Overview</h2>
+                <FaLayerGroup />
+                <h3>Overview</h3>
             </div>
             <div className="list-item">
                 {overviewData.map(item => (
@@ -57,7 +59,7 @@ function Overview() {
                         </div>
                         <div className="overview-value">{item.price}</div>
                         <div className="overview-note">
-                        <p className="note-item"><span style={{ color: "rgb(25, 124, 32)" }}><FaCaretUp /> {item.note}</span> period of change</p>
+                            <p className="note-item"><span style={{ color: "rgb(25, 124, 32)" }}><FaCaretUp /> {item.note}</span> period of change</p>
                         </div>
                     </div>
 

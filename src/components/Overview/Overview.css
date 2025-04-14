@@ -14,8 +14,15 @@
     padding-top: 15px;
 }
 
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-
+.title svg{
+    color:#e91e63; ;
+}
 .item {
     background-color: #fff;
     border-radius: 8px;
