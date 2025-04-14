@@ -1,64 +1,57 @@
-import React, { useState, useEffect } from "react";
-import "./EditForm.css"; // Dùng lại form thêm cũng được
+import React, { useState } from "react";
+import "./AddUserModal.css"; // CSS bạn có thể dùng chung với EditForm nếu muốn
 
-function EditForm({ record, onSave, onCancel }) {
+const AddUserModal = ({ onClose, onUserAdded }) => {
     const [formData, setFormData] = useState({
-        id: "",
-        img: "",
         name: "",
         company: "",
         value: "",
         date: "",
         status: "In-progress",
+        img: null,
     });
-
-    // Cập nhật lại form mỗi khi record thay đổi
-    useEffect(() => {
-        if (record) {
-            setFormData({
-                id: record.id,
-                img: record.img || "",
-                name: record.name || "",
-                company: record.company || "",
-                value: record.value || "",
-                date: record.date || "",
-                status: record.status || "In-progress",
-            });
-        }
-    }, [record]);
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-
         setFormData((prev) => ({
             ...prev,
-            [name]: type === "file" ? URL.createObjectURL(files[0]) : value,
+            [name]: type === "file" ? files[0] : value,
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSave(formData);     // Gửi dữ liệu đã sửa về
-        onCancel();           // Đóng form sau khi lưu
+
+        const payload = new FormData();
+        Object.entries(formData).forEach(([key, value]) => {
+            payload.append(key, value);
+        });
+
+        try {
+            const res = await fetch("/api/users", {
+                method: "POST",
+                body: payload,
+            });
+
+            if (!res.ok) throw new Error("Failed to add user");
+
+            const result = await res.json();
+            onUserAdded(result); // thông báo ra ngoài để cập nhật lại bảng
+            onClose(); // đóng modal
+        } catch (error) {
+            alert("Error adding user: " + error.message);
+        }
     };
 
     return (
         <div className="modal">
             <div className="modal-content">
-                <h2>Edit User</h2>
+                <h2>ADD USER</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Avatar</label>
-                        <input type="file" name="img" onChange={handleChange} />
-                        {formData.img && (
-                            <img
-                                src={formData.img}
-                                alt="Preview"
-                                style={{ width: "100px", marginTop: "10px" }}
-                            />
-                        )}
+                        <input type="file" name="img" onChange={handleChange} accept="image/*" />
                     </div>
-
                     <div className="form-group">
                         <label>Customer Name</label>
                         <input
@@ -66,11 +59,9 @@ function EditForm({ record, onSave, onCancel }) {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="Enter Customer Name..."
                             required
                         />
                     </div>
-
                     <div className="form-group">
                         <label>Company Name</label>
                         <input
@@ -78,11 +69,9 @@ function EditForm({ record, onSave, onCancel }) {
                             name="company"
                             value={formData.company}
                             onChange={handleChange}
-                            placeholder="Enter Company Name..."
                             required
                         />
                     </div>
-
                     <div className="form-group">
                         <label>Order Value ($)</label>
                         <input
@@ -90,11 +79,9 @@ function EditForm({ record, onSave, onCancel }) {
                             name="value"
                             value={formData.value}
                             onChange={handleChange}
-                            placeholder="Enter Order Value..."
                             required
                         />
                     </div>
-
                     <div className="form-group">
                         <label>Order Date</label>
                         <input
@@ -105,35 +92,31 @@ function EditForm({ record, onSave, onCancel }) {
                             required
                         />
                     </div>
-
                     <div className="form-group">
                         <label>Status</label>
                         <div className="radio-group">
-                            {["In-progress", "New", "Complete"].map((status) => (
-                                <label key={status}>
+                            {["In-progress", "New", "Complete"].map((s) => (
+                                <label key={s}>
                                     <input
                                         type="radio"
                                         name="status"
-                                        value={status}
-                                        checked={formData.status === status}
+                                        value={s}
+                                        checked={formData.status === s}
                                         onChange={handleChange}
                                     />
-                                    {status}
+                                    {s}
                                 </label>
                             ))}
                         </div>
                     </div>
-
                     <div className="form-actions">
-                        <button type="submit" className="save-btn">Save</button>
-                        <button type="button" className="cancel-btn" onClick={onCancel}>
-                            Cancel
-                        </button>
+                        <button type="submit" className="save-btn">Add User</button>
+                        <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
     );
-}
+};
 
-export default EditForm;
+export default AddUserModal;

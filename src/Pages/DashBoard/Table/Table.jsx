@@ -2,54 +2,56 @@ import React, { memo, useEffect, useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
-import EditForm from "../../../components/EditForm/EditForm"; // Đảm bảo đường dẫn này đúng
+import EditForm from "../../../components/EditForm/EditForm";
 import "./Table.css";
 
 DataTable.use(DT);
 
 function Table({ data }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editingId, setEditingId] = useState(null);
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [selectedRecord, setSelectedRecord] = useState(null);
+    const [tableData, setTableData] = useState(data); // Dùng tableData để cập nhật
 
-    const handleClickEdit = (id) => {
-        setEditingId(id);
-        setIsEditing(true);
+    // Cập nhật khi có props mới
+    useEffect(() => {
+        setTableData(data);
+    }, [data]);
+
+    const handleEdit = (record) => {
+        setSelectedRecord(record);
+        setShowEditForm(true);
     };
 
-    const handleSave = (editedData) => {
-        console.log("Dữ liệu đã chỉnh sửa:", editedData);
-        setIsEditing(false);
-        setEditingId(null);
+    const handleSaveEdit = (updatedRecord) => {
+        setTableData((prev) =>
+            prev.map((item) => (item.id === updatedRecord.id ? updatedRecord : item))
+        );
+        setShowEditForm(false);
     };
 
     const handleCancelEdit = () => {
-        setIsEditing(false);
-        setEditingId(null);
+        setSelectedRecord(null);
+        setShowEditForm(false);
     };
 
-    const recordToEdit = data.find((item) => item.id === editingId);
+    const handleClickEdit = (id) => {
+        const record = tableData.find((item) => item.id === id);
+        if (record) handleEdit(record);
+    };
 
     const columns = [
         {
-            title: `<div style="text-align: center;">
-                        <input type="checkbox" />
-                    </div>`,
+            title: `<div style="text-align: center;"><input type="checkbox" /></div>`,
             data: null,
             render: () =>
-                `<div style="text-align: center;">
-                    <input type="checkbox" />
-                </div>`,
+                `<div style="text-align: center;"><input type="checkbox" /></div>`,
         },
         {
             title: "CUSTOMER NAME",
             data: null,
             render: (data, type, row) =>
                 `<div style="display: flex; align-items: center; padding-left: 30px">
-                    <img
-                        src="${row.img}"
-                        alt="Avatar"
-                        style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"
-                    />
+                    <img src="${row.img}" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;" />
                     <span>${row.name}</span>
                 </div>`,
         },
@@ -64,10 +66,7 @@ function Table({ data }) {
             data: "date",
             render: (data) => {
                 const date = new Date(data);
-                const formattedDate = date
-                    .toLocaleDateString("en-GB")
-                    .replace(/\//g, "/");
-                return `<span style="color: #a8a6a6;">${formattedDate}</span>`;
+                return `<span style="color: #a8a6a6;">${date.toLocaleDateString("en-GB")}</span>`;
             },
         },
         {
@@ -89,13 +88,12 @@ function Table({ data }) {
                 return `
                     <div class="box-check" data-id="${row.id}" style="cursor: pointer; display: flex; justify-content: center;">
                         <svg fill="#a8a6a6" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306.637 306.637">
-                            <g> 
-                                <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"></path> 
-                                <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z"></path> 
+                            <g>
+                                <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z"></path>
+                                <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z"></path>
                             </g>
                         </svg>
-                    </div>
-                `;
+                    </div>`;
             },
         },
     ];
@@ -115,20 +113,20 @@ function Table({ data }) {
         return () => {
             table?.removeEventListener("click", handleEditClick);
         };
-    }, [data]);
+    }, [tableData]);
 
     return (
         <>
-            {isEditing && (
+            {showEditForm && selectedRecord && (
                 <EditForm
-                    record={recordToEdit}
-                    onSave={handleSave}
+                    record={selectedRecord}
+                    onSave={handleSaveEdit}
                     onCancel={handleCancelEdit}
                 />
             )}
 
             <DataTable
-                data={data}
+                data={tableData}
                 columns={columns}
                 options={{
                     paging: true,

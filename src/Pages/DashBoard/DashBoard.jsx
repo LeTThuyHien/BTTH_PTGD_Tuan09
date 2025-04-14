@@ -9,7 +9,7 @@ import Table from './Table/Table';
 
 function DashBoard() {
     const [table, setTable] = useState([]);
-    
+
     useEffect(() => {
         fetch("https://67c7c544c19eb8753e7aac5f.mockapi.io/api/gc")
             .then((res) => res.json())
@@ -32,6 +32,7 @@ function DashBoard() {
                     <h3>Detailed report</h3>
                 </div>
                 <div>
+                    <button>+ &nbsp;Add User</button>
                     <button><FaFileImport /> &nbsp;Import</button>
                     <button><FaFileExport />&nbsp;Export</button>
                 </div>
