@@ -1,22 +1,23 @@
-// import { Sidebar } from "lucide-react";
-// import Header from "../../components/Header/Header";
-// import Overview from "../../components/Overview/Overview";
-// import "./DefaultLayout.css";
-// import { Outlet } from "react-router-dom";
-// import Footer from "../../components/Footer/Footer";
+import  Sidebar  from "../../components/Sidebar/Sidebar";
 
-// function DefaultLayout() {
-//     return (
-//         <div className="default-layout">
-//             <Header />
-//             <Overview />
-//             <div className="content">
-//                 <Outlet />
-//             </div>
-//             <Sidebar />
-//             <Footer />
-//         </div>
-//     );
-// }
+import Header from "../../components/Header/Header";
+import Overview from "../../components/Overview/Overview";
+import "./DefaultLayout.css";
+import { Outlet } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
 
-// export default DefaultLayout;
+function DefaultLayout() {
+    return (
+        <div className="default-layout">
+            <Header />
+            <Overview />
+            <div className="content">
+                <Outlet />
+            </div>
+            <Sidebar />
+            <Footer />
+        </div>
+    );
+}
+
+export default DefaultLayout;

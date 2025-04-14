@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
-import { FaFileLines } from 'react-icons/fa6';
+import { FaFileLines, FaUserPlus } from 'react-icons/fa6';
 import { FaFileExport, FaFileImport } from 'react-icons/fa';
 import DataTable from 'datatables.net-react';
-import DT from 'datatables.net-dt';
 import 'datatables.net-select-dt';
 
-
-import "./Content.css";
+import './DashBoard.css';
 import Table from './Table/Table';
 
-function Content() {
+function DashBoard() {
     const [table, setTable] = useState([]);
+    
     useEffect(() => {
         fetch("https://67c7c544c19eb8753e7aac5f.mockapi.io/api/gc")
             .then((res) => res.json())
@@ -22,10 +21,12 @@ function Content() {
                 setTable(table);
             })
     }, []);
-    console.table(table);
+
+
+
     return (
-        <div className="content">
-            <div className="title-content">
+        <div className="darhboard">
+            <div className="title-darhboard">
                 <div>
                     <FaFileLines />
                     <h3>Detailed report</h3>
@@ -35,11 +36,10 @@ function Content() {
                     <button><FaFileExport />&nbsp;Export</button>
                 </div>
             </div>
-            <Table data={table} />
+            <Table data={table} setData={setTable} />
+
         </div>
     );
 }
 
-
-
-export default Content;
+export default DashBoard;

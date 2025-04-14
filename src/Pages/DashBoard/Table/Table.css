@@ -27,14 +27,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 0;
+    margin: 5px 0;
 }
 
 nav[aria-label='pagination']>button[aria-current='page'] {
     width: 30px;
     height: 30px;
     border-radius: 100rem;
-    background-color: #e03572;
+    background-color: #e74b82;
     color: #fff;
 }
 
