@@ -226,10 +226,128 @@
     opacity: 0.9;
 }
 
-/* Responsive adjustments if needed */
 @media (max-width: 768px) {
     .recipe-card {
         width: 90%;
         padding: 20px;
+    }
+}
+
+
+/* This Summer Recipes */
+.related-recipes-container {
+    padding: 40px 0 20px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.related-recipes-container h2 {
+    color: #E35094;
+    /* Pink color for the heading */
+    font-size: 2em;
+    /* Larger font size for the heading */
+    margin-bottom: 10px;
+}
+
+.related-recipes-container p {
+    color: #777;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+
+}
+
+.related-recipes-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    overflow-x: auto;
+    padding: 20px 0;
+}
+
+.related-recipe-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    flex-shrink: 0;
+    /* Prevent cards from shrinking */
+}
+
+.related-recipe-image {
+    width: 100%;
+    height: 65%;
+    aspect-ratio: 1 / 1;
+    /* Make images square */
+    object-fit: cover;
+}
+
+.related-recipe-info {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.related-recipe-info div:first-child p {
+    width: 50%;
+    padding: 5px;
+
+    background-color: #f0588b;
+    color: #f6f3f3;
+    border-radius: 8px;
+
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.related-recipe-info>div:first-child {
+    flex-grow: 1;
+    /* Allow title and time to take up available space */
+}
+
+.related-recipe-name {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.related-recipe-time {
+    color: #999;
+    font-size: 0.8em;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.icon-save-item {
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e91e63;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.icon-save-item svg {
+    color: #e91e63;
+}
+
+/* Responsive adjustments (optional) */
+@media (max-width: 768px) {
+    .related-recipes-grid {
+        justify-content: flex-start;
+        /* Align items to the start on smaller screens */
     }
 }
