@@ -238,7 +238,6 @@
 .related-recipes-container {
     padding: 40px 0 20px;
     text-align: center;
-    background-color: #f8f8f8;
 }
 
 .related-recipes-container h2 {
@@ -266,7 +265,6 @@
 }
 
 .related-recipe-card {
-    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -344,10 +342,11 @@
     color: #e91e63;
 }
 
-/* Responsive adjustments (optional) */
 @media (max-width: 768px) {
     .related-recipes-grid {
         justify-content: flex-start;
         /* Align items to the start on smaller screens */
     }
 }
+
+/* Edit */

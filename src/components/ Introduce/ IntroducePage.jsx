@@ -3,6 +3,7 @@ import ChefifyLogo from "../../assets/images/Chefify.png";
 import imgIntro from "../../assets/images/img_intro.jpeg";
 import imagesAvt from "../../assets/images/avt.png";
 import { FaBookmark, FaSearch } from "react-icons/fa";
+import EditorPick from "./EditorPick/EditorPick";
 
 function IntroducePage() {
     const relatedRecipesData = [
@@ -31,6 +32,46 @@ function IntroducePage() {
             image: "https://res.cloudinary.com/dlbg2caig/image/upload/v1741144551/chup-san-pham_uqb00m.jpg"
         }
     ];
+
+    const recipesData = [
+        {
+            id: 1,
+            title: "Stuffed sticky rice ball",
+            author: "Jennifer King",
+            time: "34 minutes",
+            description: "Stuffed sticky rice balls: A delightful Asian treat with chewy, glutinous rice and a flavorful surprise filling...",
+            avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+            image: "https://res.cloudinary.com/dlbg2caig/image/upload/v1741144551/chup-san-pham_uqb00m.jpg",
+        },
+        {
+            id: 2,
+            title: "Strawberry smoothie",
+            author: "Matthew Martinez",
+            time: "40 minutes",
+            description: "Savor the refreshing delight of a strawberry smoothie. Made with ripe strawberries, this creamy blend offers...",
+            avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+            image: "https://res.cloudinary.com/dlbg2caig/image/upload/v1741144551/chup-san-pham_uqb00m.jpg",
+        },
+        {
+            id: 3,
+            title: "Latte Art",
+            author: "Sarah Hill",
+            time: "19 minutes",
+            description: "Latte art is the skillful craft of creating captivating designs on the surface of a latte...",
+            avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+            image: "https://res.cloudinary.com/dlbg2caig/image/upload/v1741144551/chup-san-pham_uqb00m.jpg",
+        },
+        {
+            id: 4,
+            title: "Butter fried noodles",
+            author: "Julia Lopez",
+            time: "16 minutes",
+            description: "Butter fried noodles: Savory noodles cooked in butter for a delicious and satisfying meal...",
+            avatar: "https://randomuser.me/api/portraits/women/4.jpg",
+            image: "https://res.cloudinary.com/dlbg2caig/image/upload/v1741144551/chup-san-pham_uqb00m.jpg",
+        },
+    ];
+
 
 
     return (
@@ -125,6 +166,10 @@ function IntroducePage() {
                     ))}
                 </div>
             </div>
+
+            <EditorPick recipes={recipesData} />
+
+
 
         </div>
     );
