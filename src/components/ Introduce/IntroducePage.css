@@ -1,0 +1,235 @@
+/* Header.css */
+.header-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    padding: 0 10px;
+
+}
+
+.branding-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.logo-chef {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-weight: bold;
+    color: #e91e63;
+    font-size: 18px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f3f3f3;
+    padding: 3px 12px;
+    border-radius: 8px;
+    gap: 8px;
+    max-width: 100%;
+}
+
+.search-icon {
+    flex-shrink: 0;
+    color: #888;
+}
+
+.search-intro {
+    border: none !important;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    width: 250px !important;
+    /* 👈 Tăng độ dài input */
+    min-width: 180px !important;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-item-intro {
+    margin: 15px;
+}
+
+.title-item-intro {
+    text-decoration: none;
+    color: #7c7a7a;
+    font-size: 16px;
+}
+
+.actions-btn {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.login-button {
+    background-color: #ffebee;
+    color: #e91e63;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.subscribe-button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* img-intro */
+
+/* Full screen image container */
+.full-screen-container {
+    position: relative;
+    /* Để chứa ảnh full màn hình và form */
+    min-height: 100vh;
+    /* Đảm bảo chiếm ít nhất chiều cao màn hình */
+    overflow: hidden;
+    /* Ngăn chặn thanh cuộn nếu ảnh lớn hơn màn hình */
+}
+
+.full-screen-image-container {
+    position: relative;
+    /* Để định vị form bên trong */
+    width: 100%;
+    height: 100vh;
+    /* Chiếm toàn bộ chiều cao viewport */
+}
+
+.full-screen-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ảnh lấp đầy container và có thể bị cắt */
+}
+
+/* Form hiển thị trên ảnh */
+.full-screen-container {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.full-screen-image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Recipe Card Style */
+.recipe-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 20;
+    border: 1px dashed #c16363;
+
+}
+
+.recipe-of-the-day {
+    position: absolute;
+    top: -5%;
+    left: 30%;
+    background-color: rgb(243, 178, 49);
+    padding: 10px;
+    font-size: 14px;
+    color: #555353;
+    border-radius: 8px;
+}
+
+.recipe-title {
+    color: #E35094;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.recipe-description {
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.recipe-user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-avatar-container {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe-author {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.view-now-button {
+    background-color: #E35094;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.view-now-button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+    .recipe-card {
+        width: 90%;
+        padding: 20px;
+    }
+}

@@ -6,11 +6,16 @@ import Teams from "../Pages/Teams/Teams";
 import Analytics from "../Pages/Analytics/Analytics";
 import Messages from "../Pages/Messages/Messages";
 import Integration from "../Pages/Integrations/Integration";
+import IntroducePage from "../components/ Introduce/ IntroducePage";
 
 
 
 
 const router = createBrowserRouter([
+    {
+        path: "/introduce", // <-- nằm ngoài DefaultLayout
+        element: <IntroducePage />
+    },
 
     {
         path: "/",
@@ -19,26 +24,26 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <DashBoard />
-            }, 
+            },
             {
                 path: "/projects",
                 element: <Projects />
             },
             {
                 path: "/teams",
-                element:<Teams />
+                element: <Teams />
             },
             {
                 path: "/analytics",
-                element:<Analytics />
+                element: <Analytics />
             },
             {
-                path:"/messages",
+                path: "/messages",
                 element: <Messages />
             },
             {
                 path: "/integration",
-                element: <Integration/>
+                element: <Integration />
             }
         ]
     }
