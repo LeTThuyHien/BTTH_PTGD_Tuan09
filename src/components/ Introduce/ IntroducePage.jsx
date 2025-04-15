@@ -4,6 +4,7 @@ import imgIntro from "../../assets/images/img_intro.jpeg";
 import imagesAvt from "../../assets/images/avt.png";
 import { FaBookmark, FaSearch } from "react-icons/fa";
 import EditorPick from "./EditorPick/EditorPick";
+import Footer from "./Footer/Footer";
 
 function IntroducePage() {
     const relatedRecipesData = [
@@ -168,9 +169,7 @@ function IntroducePage() {
             </div>
 
             <EditorPick recipes={recipesData} />
-
-
-
+            <Footer/>
         </div>
     );
 }

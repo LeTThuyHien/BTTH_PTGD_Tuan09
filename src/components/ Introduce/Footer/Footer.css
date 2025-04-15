@@ -1,0 +1,207 @@
+/* Footer.css */
+.footer-container {
+    background-color: #191819;
+    color: #E2E8F0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.footer-section {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-section>div {
+    margin-bottom: 30px;
+}
+
+.footer-section>div:last-child {
+    margin-bottom: 0;
+}
+
+.about-us {
+    grid-column: 1 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about-us h4 {
+    color: #E35094;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.about-us p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.newsletter-signup {
+    display: flex;
+}
+
+.newsletter-signup input[type="email"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    color: #4A5568;
+}
+
+.newsletter-signup .subscribe-button {
+    background-color: #E35094;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-signup .subscribe-button:hover {
+    background-color: #D6337A;
+}
+
+.bottom-left {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.bottom-left img {
+    height: 30px;
+    margin-right: 15px;
+}
+
+.bottom-left span a {
+    color: #A0AEC0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.bottom-left span a:hover {
+    color: #CBD5E0;
+}
+
+.learn-more {
+    grid-column: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.learn-more h4,
+.learn-more h3,
+.shop h4,
+.shop h3 {
+    color: #E35094;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.learn-more ul,
+.shop ul {
+    list-style: none;
+    padding: 0;
+}
+
+.learn-more ul li,
+.shop ul li {
+    margin-bottom: 10px;
+}
+
+.learn-more ul li a,
+.shop ul li a {
+    color: #A0AEC0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.learn-more ul li a:hover,
+.shop ul li a:hover {
+    color: #CBD5E0;
+}
+
+.shop {
+    grid-column: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.recipes {
+    grid-column: 3 / span 1;
+}
+
+.recipes h3 {
+    color: #E35094;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.recipes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recipes ul li {
+    margin-bottom: 10px;
+}
+
+.recipes ul li a {
+    color: #A0AEC0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.recipes ul li a:hover {
+    color: #CBD5E0;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .about-us {
+        grid-column: 1 / span 1;
+    }
+
+    .learn-more {
+        grid-column: 1 / span 1;
+    }
+
+    .shop {
+        grid-column: 1 / span 1;
+    }
+
+    .recipes {
+        grid-column: 1 / span 1;
+    }
+
+    .footer-section {
+        margin-bottom: 40px;
+    }
+
+    .bottom-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bottom-left span {
+        margin-bottom: 8px;
+    }
+}
